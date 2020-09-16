@@ -1,0 +1,21 @@
+{
+    "manifest_version": 2,
+    "name": "Location Parameter Controller",
+    "version": "1.0.0",
+    "description": "Control Url Request Parameter",
+    "browser_action": {
+	"default_title": "Location Parameter Controller",
+	"default_popup": "public/popup.html"
+    },
+    "content_scripts": [
+	{
+	    "matches": [
+		"<all_urls>"
+	    ],
+	    "js": [
+		"public/content.js"
+	    ],
+	    "run_at": "document_start"
+	}
+    ]
+}

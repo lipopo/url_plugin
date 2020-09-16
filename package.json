@@ -1,0 +1,21 @@
+{
+  "name": "url-plugin",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "build": "parcel build popup.html -d public --public-url public/ -o popup.html",
+    "watch": "parcel watch -d public --public-url ./ popup.html content.coffee"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "coffeescript": "^2.5.1",
+    "parcel-bundler": "^1.12.4",
+    "stylus": "^0.54.8"
+  },
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
+}
