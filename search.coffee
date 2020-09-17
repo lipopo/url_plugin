@@ -14,9 +14,11 @@ class Search
 
   get_search: ->
     search_value = @search_list.map(
-      (search_item) => search_item.join("=")
+      (search_item) => search_item.map((value) ->
+        encodeURI(value)
+      ).join("=")
     ).join("&")
-    return encodeURI("?#{search_value}")
+    return "?#{search_value}"
 
 
 export default Search

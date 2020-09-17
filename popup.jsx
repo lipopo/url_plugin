@@ -86,6 +86,13 @@ export default function Popup(props)
 	setLocation(loc).then(() => log("Set Location End"));
     }; 
 
+    let copy_params = () => {
+	log("Copy Params");
+	navigator.clipboard.writeText(
+	    search_instance.get_search()
+	).then(() => log("Copied!"));
+    }
+
     return (
 	<div className="app">
 	    <div intent="header">
@@ -98,6 +105,9 @@ export default function Popup(props)
 	            </span>
 	        </div>
 	        <div intent="control">
+	            <div tobe="button" intent="reload-btn" onClick={copy_params}>
+	                Copy Params
+	            </div>
 	            <div tobe="button" intent="reload-btn" onClick={reload_location}>
 	                Reload Location
 	            </div>
