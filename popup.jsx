@@ -114,6 +114,10 @@ export default function Popup(props)
 	        </div>
 	    </div>
 	    <div intent="content">
+
+	    <div intent="input-group">
+
+	    </div>
 	    {
 		search === null || search?.length <= 0 ? <div intent="no-field">
 		  <span>No Field In Location URL</span>
