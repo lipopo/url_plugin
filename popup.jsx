@@ -63,6 +63,7 @@ function setLocation(loc)
 export default function Popup(props)
 {
     let [search, setSearch] = useState(null);
+    let [host, setHost] = useState(null);
     let [field_count, setFieldCount] = useState(0);
     let [loc, setLoc] = useState(null);
     let [search_instance, setSearchInstance] = useState(null);
@@ -74,6 +75,7 @@ export default function Popup(props)
 	    setSearchInstance(search_ins);
 	    log(search_ins);
 	    setSearch(search_ins.get_search_list());
+	    setHost(loc.host);
 	    setLoc(loc);
 	    setFieldCount(search_ins.get_field_count());
         });
@@ -82,8 +84,10 @@ export default function Popup(props)
     let reload_location = () => {
 	log("Reloading Location");
 	search_instance.search_list = search;
-	loc.search = search_instance.get_search();
-	setLocation(loc).then(() => log("Set Location End"));
+	let new_loc = {};
+	new_loc.search = search_instance.get_search();
+	new_loc.host = host;
+	setLocation(new_loc).then(() => log("Set Location End"));
     }; 
 
     let copy_params = () => {
@@ -106,18 +110,39 @@ export default function Popup(props)
 	        </div>
 	        <div intent="control">
 	            <div tobe="button" intent="reload-btn" onClick={copy_params}>
-	                Copy Params
+	                Copy
 	            </div>
 	            <div tobe="button" intent="reload-btn" onClick={reload_location}>
-	                Reload Location
+	                Reload
 	            </div>
 	        </div>
 	    </div>
 	    <div intent="content">
 
 	    <div intent="input-group">
-
+	        <div intent="group-title">
+	            <span>Host</span>
+	        </div>
+	        <div intent="group-content">
+	            <div intent="inputs-box">
+	                <div intent="input-row">
+	                    <div intent="input-key">Host</div>
+	                    <div intent="input-value">
+	                        <input type="text" defaultValue={host} onInput={
+				    (e) => {
+					setHost(e.target.value);
+				    }
+				}></input>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
 	    </div>
+	    <div intent="input-group">
+	        <div intent="group-title">
+	            Parameters
+	        </div>
+	        <div intent="group-content">
 	    {
 		search === null || search?.length <= 0 ? <div intent="no-field">
 		  <span>No Field In Location URL</span>
@@ -156,6 +181,8 @@ export default function Popup(props)
 		    }
 		)
 	    }
+	        </div>
+	    </div>
 	    </div>
 	</div>
     );

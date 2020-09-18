@@ -1,7 +1,10 @@
 
 class ContentScript
   set_location: (location) ->
-    window.location.search = location.search
+    new_location = window.location
+    Object.keys(location).forEach (key) ->
+      new_location[key] = location[key]
+    document.location = new_location
 
   get_location: ->
     window.location

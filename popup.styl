@@ -32,12 +32,21 @@
       color gray 
 
     [intent="control"]
-      color red
+      display flex
+      align-item center
       [intent="reload-btn"]
         @extend .gray-button, .pad-1
 
   [intent="content"]
     @extend .pad-1
+
+    [intent="input-group"]
+      [intent="group-title"]
+        font-weight bold
+
+      [intent="group-content"]
+        @extend.pad-1
+
     [intent="inputs-box"]
       @extend .pad-1
       width 100%
@@ -60,6 +69,7 @@
 	  span
 	    @extend .gray-button, .pad-1
 	    cursor pointer
+
     [intent="no-field"]
       @extend .pad-1
       width 100%
