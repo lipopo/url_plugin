@@ -64,6 +64,7 @@ export default function Popup(props)
 {
     let [search, setSearch] = useState(null);
     let [host, setHost] = useState(null);
+    let [hosts, setHostList] = useState([]);
     let [field_count, setFieldCount] = useState(0);
     let [loc, setLoc] = useState(null);
     let [search_instance, setSearchInstance] = useState(null);
@@ -72,10 +73,12 @@ export default function Popup(props)
     {
         getLocation().then(loc => {
       	    let search_ins = new Search(loc.search);
+	    hosts = [...hosts, loc.host];
+
 	    setSearchInstance(search_ins);
-	    log(search_ins);
 	    setSearch(search_ins.get_search_list());
 	    setHost(loc.host);
+	    setHosts(loc.hostList);
 	    setLoc(loc);
 	    setFieldCount(search_ins.get_field_count());
         });
@@ -84,11 +87,23 @@ export default function Popup(props)
     let reload_location = () => {
 	log("Reloading Location");
 	search_instance.search_list = search;
+
 	let new_loc = {};
 	new_loc.search = search_instance.get_search();
 	new_loc.host = host;
+
 	setLocation(new_loc).then(() => log("Set Location End"));
     }; 
+
+    let add_host = () => {
+	hosts.push("");
+	setHostList(hosts);
+    }
+
+    let del_host = (idx) => {
+	hosts.splice(idx, 1);
+	setHostList(hosts);
+    }
 
     let copy_params = () => {
 	log("Copy Params");
@@ -120,9 +135,12 @@ export default function Popup(props)
 	    <div intent="content">
 
 	    <div intent="input-group">
-	        <div intent="group-title">
-	            <span>Host</span>
+	        <div intent="group-header">
+	            <div intent="group-title">
+	                <span>Host</span>
+	            </div>
 	        </div>
+	        
 	        <div intent="group-content">
 	            <div intent="inputs-box">
 	                <div intent="input-row">
@@ -143,13 +161,14 @@ export default function Popup(props)
 	            Parameters
 	        </div>
 	        <div intent="group-content">
-	    {
+	        {
 		search === null || search?.length <= 0 ? <div intent="no-field">
 		  <span>No Field In Location URL</span>
 		</div> :
 		search.map(
 		    (search_item, idx) => {
 			let search_value = decodeURIComponent(search_item[1]);
+			log(`${search_item[1]} --> ${search_value}`)
 			return (
 			    <div intent="inputs-box">
 			        <div intent="input-row">

@@ -1,3 +1,8 @@
+gray-hover = {
+  color: #555
+  background: lightgray
+}
+
 *
   padding 0
   margin 0
@@ -8,8 +13,7 @@
   background gray
 
   &:hover
-    color #555
-    background lightgray
+    {gray-hover}
 
 .pad-1
   padding 0.3rem
@@ -21,6 +25,9 @@
   width 23rem
 
   [tobe="button"]
+    cursor pointer
+
+  [tobe="radio"]
     cursor pointer
 
   [intent="header"]
@@ -39,13 +46,17 @@
 
   [intent="content"]
     @extend .pad-1
-
     [intent="input-group"]
+
       [intent="group-title"]
         font-weight bold
 
+      [intent="group-btn"]
+        @extend .gray-button
+	text-align center
+      
       [intent="group-content"]
-        @extend.pad-1
+        @extend .pad-1
 
     [intent="inputs-box"]
       @extend .pad-1
@@ -69,6 +80,11 @@
 	  span
 	    @extend .gray-button, .pad-1
 	    cursor pointer
+	  div[tobe="radio"]
+	    @extend .gray-button, .pad-1
+
+	  div[status-now="radio-checked"]
+	    {gray-hover}
 
     [intent="no-field"]
       @extend .pad-1
