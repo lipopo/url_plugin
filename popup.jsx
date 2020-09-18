@@ -124,7 +124,7 @@ export default function Popup(props)
 		</div> :
 		search.map(
 		    (search_item, idx) => {
-			let search_value = decodeURI(search_item[1]);
+			let search_value = decodeURIComponent(search_item[1]);
 			return (
 			    <div intent="inputs-box">
 			        <div intent="input-row">
@@ -138,7 +138,7 @@ export default function Popup(props)
 			                    onInput={(e) => {
 						let value = e.target.value;
 						let search_ = [...search];
-						search_[idx][1] = value;
+						search_[idx][1] = encodeURIComponent(value);
 						setSearch(search_);
 					    }}
 			                ></input>

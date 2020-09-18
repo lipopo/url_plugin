@@ -14,9 +14,8 @@ class Search
 
   get_search: ->
     search_value = @search_list.map(
-      (search_item) => search_item.map((value) ->
-        encodeURI(value)
-      ).join("=")
+      (kv_pair) ->
+        kv_pair.join("=")
     ).join("&")
     return "?#{search_value}"
 
