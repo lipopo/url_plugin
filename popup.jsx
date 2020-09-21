@@ -64,6 +64,8 @@ export default function Popup(props)
 {
     let [search, setSearch] = useState(null);
     let [host, setHost] = useState(null);
+    let [path, setPath] = useState(null);
+
     let [field_count, setFieldCount] = useState(0);
     let [loc, setLoc] = useState(null);
     let [search_instance, setSearchInstance] = useState(null);
@@ -76,6 +78,7 @@ export default function Popup(props)
 	    log(search_ins);
 	    setSearch(search_ins.get_search_list());
 	    setHost(loc.host);
+	    setPath(loc.pathname);
 	    setLoc(loc);
 	    setFieldCount(search_ins.get_field_count());
         });
@@ -87,6 +90,7 @@ export default function Popup(props)
 	let new_loc = {};
 	new_loc.search = search_instance.get_search();
 	new_loc.host = host;
+	new_loc.pathname = path;
 	setLocation(new_loc).then(() => log("Set Location End"));
     }; 
 
@@ -118,7 +122,7 @@ export default function Popup(props)
 	        </div>
 	    </div>
 	    <div intent="content">
-
+	    {/** 结构需要优化 **/}
 	    <div intent="input-group">
 	        <div intent="group-title">
 	            <span>Host</span>
@@ -138,6 +142,27 @@ export default function Popup(props)
 	            </div>
 	        </div>
 	    </div>
+
+	    <div intent="input-group">
+	        <div intent="group-title">
+	            <span>Path</span>
+	        </div>
+	        <div intent="group-content">
+	            <div intent="inputs-box">
+	                <div intent="input-row">
+	                    <div intent="input-key">Path</div>
+	                    <div intent="input-value">
+	                        <input type="text" defaultValue={path} onInput={
+				    (e) => {
+					setPath(e.target.value)
+				    }
+				}></input>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+
 	    <div intent="input-group">
 	        <div intent="group-title">
 	            Parameters
