@@ -124,10 +124,16 @@ export default function Popup(props)
 	            </span>
 	        </div>
 	        <div intent="control">
-	            <div tobe="button" intent="reload-btn" onClick={copy_params}>
+	            <div
+	                tobe="button"
+	                intent="reload-btn"
+	                onClick={copy_params}>
 	                Copy
 	            </div>
-	            <div tobe="button" intent="reload-btn" onClick={reload_location}>
+	            <div
+	                tobe="button"
+	                intent="reload-btn"
+	                onClick={reload_location}>
 	                Reload
 	            </div>
 	        </div>
