@@ -1,10 +1,11 @@
 
 class ContentScript
   set_location: (location) ->
-    new_location = window.location
-    Object.keys(location).forEach (key) ->
-      new_location[key] = location[key]
-    document.location = new_location
+    location_str = document.location.toString()
+    Object.keys(location).forEach (k) ->
+      location_str = location_str.replace(document.location[k], location[k])
+    document.location = location_str
+    return true
 
   get_location: ->
     window.location
